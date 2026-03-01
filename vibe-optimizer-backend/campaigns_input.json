@@ -1,0 +1,42 @@
+[
+  {
+    "local_image_path": "Neutrogena.png",
+    "campaign_data": {
+        "campaign_name": "Winter Hydration Launch",
+        "campaign_objectives": "Conversions", 
+        "platform_channels": "Instagram", 
+        "brand_name": "AuraGlow",
+        "product_name": "Vitamin C Radiance",
+        "product_category": "Skincare",
+        "product_highlights": "Deep hydration, fades dark spots, instantly brightens skin tone",
+        "ingredients": "15% L-Ascorbic Acid, Hyaluronic Acid",
+        "price": 45.99,
+        "target_audience": "25-34", 
+        "vibe": "Luxury",
+        "duration": "15 seconds",
+        "channel_used": "Instagram", 
+        "visual_elements": "lemon slices",
+        "colors": "#FFD700, #FFFFFF, #F5F5DC"
+    }
+  },
+  {
+    "local_image_path": "esteelauder.png",
+    "campaign_data": {
+        "campaign_name": "Bold Matte Summer",
+        "campaign_objectives": "Brand Awareness", 
+        "platform_channels": "Facebook", 
+        "brand_name": "Velvet Serum",
+        "product_name": "Liquid Matte",
+        "product_category": "Makeup",
+        "product_highlights": "Smudge-proof, 24-hour wear, vivid pigmentation",
+        "ingredients": "Vitamin E, Jojoba Oil",
+        "price": 22.50,
+        "target_audience": "18-28", 
+        "vibe": "Nature",
+        "duration": "10 seconds",
+        "channel_used": "Facebook", 
+        "visual_elements": "rose petals",
+        "colors": "#FF0000, #000000, #FF00FF"
+    }
+  }
+]
