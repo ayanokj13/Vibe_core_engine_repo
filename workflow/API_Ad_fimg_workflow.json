@@ -1,0 +1,150 @@
+{
+  "1": {
+    "inputs": {
+      "image": "serum_img5.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Input Product Image"
+    }
+  },
+  "3": {
+    "inputs": {
+      "rembg_session": [
+        "92",
+        0
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "ImageRemoveBackground+",
+    "_meta": {
+      "title": "🔧 Image Remove Background"
+    }
+  },
+  "10": {
+    "inputs": {
+      "x": 109,
+      "y": 397,
+      "resize_source": false,
+      "destination": [
+        "100",
+        0
+      ],
+      "source": [
+        "65",
+        0
+      ],
+      "mask": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "ImageCompositeMasked",
+    "_meta": {
+      "title": "Mathematical Pasting"
+    }
+  },
+  "11": {
+    "inputs": {
+      "filename_prefix": "Final_Ad_",
+      "images": [
+        "951",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "65": {
+    "inputs": {
+      "width": 550,
+      "height": 550,
+      "interpolation": "bicubic",
+      "method": "pad",
+      "condition": "always",
+      "multiple_of": false,
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "Resize Product"
+    }
+  },
+  "92": {
+    "inputs": {
+      "model": "u2net: general purpose",
+      "providers": "CPU"
+    },
+    "class_type": "RemBGSession+",
+    "_meta": {
+      "title": "🔧 RemBG Session"
+    }
+  },
+  "100": {
+    "inputs": {
+      "image": "Background_Asset_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Fetch Background from Drive"
+    }
+  },
+  "950": {
+    "inputs": {
+      "text": "ESTEE LAUDER",
+      "font_name": "impact.ttf",
+      "font_size": 85,
+      "font_color": "white",
+      "align": "top",
+      "justify": "center",
+      "margins": 40,
+      "line_spacing": 0,
+      "position_x": 0,
+      "position_y": 0,
+      "rotation_angle": 0,
+      "rotation_options": "text center",
+      "font_color_hex": "#000000",
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "CR Overlay Text",
+    "_meta": {
+      "title": "Add Top Text"
+    }
+  },
+  "951": {
+    "inputs": {
+      "text": "Unlock Your Youthful Glow",
+      "font_name": "YoungSerif-Regular.ttf",
+      "font_size": 55,
+      "font_color": "white",
+      "align": "center",
+      "justify": "center",
+      "margins": 40,
+      "line_spacing": 0,
+      "position_x": 0,
+      "position_y": 550,
+      "rotation_angle": 0,
+      "rotation_options": "text center",
+      "font_color_hex": "#000000",
+      "image": [
+        "950",
+        0
+      ]
+    },
+    "class_type": "CR Overlay Text",
+    "_meta": {
+      "title": "Add Bottom Text"
+    }
+  }
+}

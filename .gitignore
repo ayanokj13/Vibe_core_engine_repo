@@ -1,0 +1,10 @@
+# Environments
+.env
+__pycache__/
+
+# Local Outputs and heavy files
+Test_outputs/
+Ad_output_imgs/
+*.jpg
+*.png
+*.mp4
