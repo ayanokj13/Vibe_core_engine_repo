@@ -74,7 +74,7 @@ def generate_json_reports(batch_id: int):
     campaign = camp_res.data[0]
     safe_name = sanitize_filename(campaign['campaign_name'])
 
-    # B. Fetch All Traces (Ordered chronologically by ID)
+    # B. Fetch All Traces (Ordered chronologically by ID to prove learning trajectory)
     gen_res = supabase.table("generator_output").select("*").eq("batch_id", batch_id).order("trace_id").execute()
     all_traces = gen_res.data or []
     trace_ids = [t['trace_id'] for t in all_traces]
@@ -84,7 +84,6 @@ def generate_json_reports(batch_id: int):
     scores_dict = {row['trace_id']: row for row in (scores_res.data or [])}
 
     # Slice the traces to get First vs Final iteration
-    # (Assuming 3 variants per iteration based on generator_script.py)
     first_iter_traces = all_traces[:3] if len(all_traces) >= 3 else all_traces
     final_iter_traces = all_traces[-3:] if len(all_traces) >= 3 else all_traces
 
@@ -112,7 +111,9 @@ def generate_json_reports(batch_id: int):
         },
         "trace_ids": trace_ids,
         "first_iteration_data": format_trace_data(first_iter_traces),
-        "final_iteration_data": format_trace_data(final_iter_traces)
+        "final_iteration_data": format_trace_data(final_iter_traces),
+        # ACADEMIC PROOF: Adding the entire trajectory for the graph
+        "all_iteration_data": format_trace_data(all_traces) 
     }
 
     report_filename = os.path.join(OUTPUT_DIR, f"{batch_id}_{safe_name}_report.json")

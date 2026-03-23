@@ -27,16 +27,35 @@ if ($selected_batch && isset($campaigns[$selected_batch])) {
     }
 }
 
+// Extract full traces for RL proof
+$all_traces = [];
+if ($active_data) {
+    // Use the newly added all_iteration_data if it exists, otherwise fallback to merged
+    $all_traces = $active_data['all_iteration_data'] ?? array_merge($active_data['first_iteration_data'], $active_data['final_iteration_data']);
+    usort($all_traces, function($a, $b) { return $a['trace_id'] <=> $b['trace_id']; });
+    
+    // Academic Proof Math: Calculate Delta
+    $first_3 = array_slice($all_traces, 0, 3);
+    $last_3 = array_slice($all_traces, -3);
+    
+    $avg_start = 0; $avg_end = 0;
+    if (count($first_3) > 0) {
+        $avg_start = array_sum(array_map(function($t) { return (float)($t['ad_feedback_scores']['reward_rt'] ?? 0); }, $first_3)) / count($first_3);
+    }
+    if (count($last_3) > 0) {
+        $avg_end = array_sum(array_map(function($t) { return (float)($t['ad_feedback_scores']['reward_rt'] ?? 0); }, $last_3)) / count($last_3);
+    }
+    $improvement_delta = $avg_end - $avg_start;
+}
+
 // Helper to bypass folder restrictions by encoding the image directly from the hard drive
 function getLocalImageAsBase64($absolutePath) {
-    // Normalize slashes for PHP
     $path = str_replace('\\', '/', $absolutePath);
     if (file_exists($path)) {
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         return 'data:image/' . $type . ';base64,' . base64_encode($data);
     }
-    // Fallback if the image was moved or deleted
     return 'https://placehold.co/600x400/eeeeee/999999?text=Image+Not+Found'; 
 }
 ?>
@@ -45,7 +64,7 @@ function getLocalImageAsBase64($absolutePath) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Core - Optimization Hub</title>
+    <title>Vibe Core - RL Optimization Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -56,22 +75,16 @@ function getLocalImageAsBase64($absolutePath) {
     <aside class="w-80 bg-white border-r border-gray-200 overflow-y-auto flex flex-col">
         <div class="p-6 border-b border-gray-200">
             <h1 class="text-2xl font-bold text-indigo-600">Vibe Core Engine</h1>
-            <p class="text-xs text-gray-500 uppercase tracking-wider mt-1">Optimization Hub</p>
+            <p class="text-xs text-gray-500 uppercase tracking-wider mt-1">RL Optimization Hub</p>
         </div>
 
         <div class="p-6 border-b border-gray-200 bg-gray-50">
-            <h3 class="font-bold text-gray-700 mb-4">Persona Schema Tags</h3>
+            <h3 class="font-bold text-gray-700 mb-4">Persona Schema</h3>
             <div class="space-y-3">
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Target Age</label>
+                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Target Audience</label>
                     <div class="w-full border-gray-300 rounded p-2 text-sm border bg-white text-gray-800 shadow-sm">
                         <?= $active_data ? htmlspecialchars($active_data['campaign_details']['target_audience']) : 'N/A' ?>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Gender Focus</label>
-                    <div class="w-full border-gray-300 rounded p-2 text-sm border bg-white text-gray-800 shadow-sm">
-                        Female
                     </div>
                 </div>
             </div>
@@ -109,48 +122,61 @@ function getLocalImageAsBase64($absolutePath) {
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                         </svg>
-                        Download PDF
+                        Export Academic PDF
                     </button>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                     
+                    <!-- WINNER CARD -->
                     <?php if ($winner_data): ?>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden lg:col-span-1 flex flex-col">
                         <div class="bg-yellow-400 text-yellow-900 text-center py-2 font-bold text-sm tracking-widest uppercase">
-                            🏆 Winning Creative
+                            🏆 Optimized Output
                         </div>
                         <img src="<?= getLocalImageAsBase64($winner_data['FINAL_IMAGE_PATH']) ?>" alt="Winning Ad" class="w-full h-48 object-cover">
                         <div class="p-6 flex-1 flex flex-col">
                             <div class="flex justify-between items-center mb-4">
                                 <span class="text-xs text-gray-500 font-semibold uppercase">Trace ID: <?= $winner_data['WINNING_TRACE_ID'] ?></span>
-                                <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-full text-sm border border-green-200">Score: <?= $winner_data['FINAL_REWARD_SCORE'] ?></span>
+                                <span class="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-full text-sm border border-green-200">Max Reward: <?= number_format($winner_data['FINAL_REWARD_SCORE'], 2) ?></span>
                             </div>
                             <?php $caption = json_decode($winner_data['WINNING_AD_COPY'], true); ?>
-                            <h4 class="font-bold text-lg mb-2 text-gray-900"><?= htmlspecialchars($caption['headline']) ?></h4>
-                            <p class="text-sm text-gray-600 mb-4 flex-1"><?= htmlspecialchars($caption['body']) ?></p>
-                            <div class="text-xs text-indigo-500 font-bold tracking-wide"><?= implode(" ", $caption['hashtags']) ?></div>
+                            <h4 class="font-bold text-lg mb-2 text-gray-900"><?= htmlspecialchars($caption['headline'] ?? 'N/A') ?></h4>
+                            <p class="text-sm text-gray-600 mb-4 flex-1"><?= htmlspecialchars($caption['body'] ?? 'N/A') ?></p>
+                            <div class="text-xs text-indigo-500 font-bold tracking-wide"><?= implode(" ", $caption['hashtags'] ?? []) ?></div>
                         </div>
                     </div>
                     <?php endif; ?>
 
+                    <!-- RL GRAPH & PROOF -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 lg:col-span-2 flex flex-col">
-                        <h3 class="font-bold text-gray-800 mb-4">RL Reward Trajectory & Drift</h3>
+                        <div class="flex justify-between items-end mb-4 border-b pb-4">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg">Proof of Optimization (RL Convergence)</h3>
+                                <p class="text-xs text-gray-500">Tracking Reward Maximization vs. Value Loss</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500 uppercase font-bold">Optimization Delta</div>
+                                <div class="text-2xl font-extrabold <?= $improvement_delta > 0 ? 'text-green-600' : 'text-red-600' ?>">
+                                    <?= $improvement_delta > 0 ? '+' : '' ?><?= number_format($improvement_delta, 2) ?> 
+                                </div>
+                            </div>
+                        </div>
                         <div class="flex-1 relative w-full h-full min-h-[250px]">
                             <canvas id="rewardChart"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="font-bold text-gray-800 mb-4 text-xl border-b pb-2">Generation Traces Breakdown</h3>
+                <h3 class="font-bold text-gray-800 mb-4 text-xl border-b pb-2">First vs. Final Iteration Traces</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <?php 
-                    // Merge traces but ensure unique IDs for display
-                    $all_traces_raw = array_merge($active_data['first_iteration_data'], $active_data['final_iteration_data']);
-                    $unique_traces = [];
-                    foreach ($all_traces_raw as $t) { $unique_traces[$t['trace_id']] = $t; }
+                    // Display only first 3 and last 3 for visual breakdown to keep UI clean
+                    $display_traces = array_merge($active_data['first_iteration_data'], $active_data['final_iteration_data']);
+                    $unique_display = [];
+                    foreach ($display_traces as $t) { $unique_display[$t['trace_id']] = $t; }
                     
-                    foreach ($unique_traces as $trace): 
+                    foreach ($unique_display as $trace): 
                         $score = $trace['ad_feedback_scores']['reward_rt'] ?? 0;
                         $is_winner = ($winner_data && $trace['trace_id'] == $winner_data['WINNING_TRACE_ID']);
                     ?>
@@ -159,25 +185,22 @@ function getLocalImageAsBase64($absolutePath) {
                         <div class="p-4">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-bold text-gray-700">Trace <?= $trace['trace_id'] ?></span>
-                                <span class="font-bold px-2 py-1 rounded text-xs <?= $score >= 15 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' ?>">Score: <?= $score ?></span>
+                                <span class="font-bold px-2 py-1 rounded text-xs <?= $score > 0 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' ?>">Score: <?= number_format((float)$score, 2) ?></span>
                             </div>
                             <div class="grid grid-cols-3 gap-2 text-center text-xs mb-4">
                                 <div class="bg-gray-50 border border-gray-100 p-2 rounded">
-                                    <div class="font-bold text-gray-800"><?= $trace['ad_feedback_scores']['at'] ?? 0 ?></div>
+                                    <div class="font-bold text-gray-800"><?= number_format((float)($trace['ad_feedback_scores']['at'] ?? 0), 2) ?></div>
                                     <div class="text-gray-500 uppercase mt-1" style="font-size:0.6rem;">Advantage</div>
                                 </div>
                                 <div class="bg-gray-50 border border-gray-100 p-2 rounded">
-                                    <div class="font-bold text-gray-800"><?= $trace['ad_feedback_scores']['vst'] ?? 0 ?></div>
-                                    <div class="text-gray-500 uppercase mt-1" style="font-size:0.6rem;">Predicted Value</div>
+                                    <div class="font-bold text-gray-800"><?= number_format((float)($trace['ad_feedback_scores']['vst'] ?? 0), 2) ?></div>
+                                    <div class="text-gray-500 uppercase mt-1" style="font-size:0.6rem;">Predicted</div>
                                 </div>
                                 <div class="bg-gray-50 border border-gray-100 p-2 rounded">
-                                    <div class="font-bold text-gray-800"><?= $trace['ad_feedback_scores']['lv'] ?? 0 ?></div>
+                                    <div class="font-bold text-gray-800"><?= number_format((float)($trace['ad_feedback_scores']['lv'] ?? 0), 2) ?></div>
                                     <div class="text-gray-500 uppercase mt-1" style="font-size:0.6rem;">Value Loss</div>
                                 </div>
                             </div>
-                            <p class="text-xs text-gray-500 bg-gray-50 p-2 rounded border border-gray-100 line-clamp-2" title="<?= htmlspecialchars($trace['prompt']) ?>">
-                                <?= htmlspecialchars($trace['prompt']) ?>
-                            </p>
                         </div>
                     </div>
                     <?php endforeach; ?>
@@ -196,54 +219,63 @@ function getLocalImageAsBase64($absolutePath) {
 
 <?php if ($active_data): ?>
 <script>
-    // --- 1. Generate the Chart ---
-    const traces = <?php echo json_encode(array_values($unique_traces)); ?>;
-    traces.sort((a, b) => a.trace_id - b.trace_id);
+    // --- 1. Generate the Chart (Academic Proof) ---
+    const allTraces = <?php echo json_encode(array_values($all_traces)); ?>;
     
-    const labels = traces.map(t => 'Trace ' + t.trace_id);
-    const scores = traces.map(t => t.ad_feedback_scores?.reward_rt || 0);
-    
-    const backgroundColors = scores.map(s => s >= 15.0 ? 'rgba(74, 222, 128, 0.6)' : 'rgba(99, 102, 241, 0.4)');
-    const borderColors = scores.map(s => s >= 15.0 ? 'rgba(74, 222, 128, 1)' : 'rgba(99, 102, 241, 1)');
+    const labels = allTraces.map((t, index) => 'Iter ' + (index + 1));
+    const rewards = allTraces.map(t => parseFloat(t.ad_feedback_scores?.reward_rt || 0));
+    const losses = allTraces.map(t => parseFloat(t.ad_feedback_scores?.lv || 0));
 
     const ctx = document.getElementById('rewardChart').getContext('2d');
     new Chart(ctx, {
         type: 'line', 
         data: {
             labels: labels,
-            datasets: [{
-                label: 'RL Reward Score (Rt)',
-                data: scores,
-                backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                borderColor: 'rgba(99, 102, 241, 1)',
-                pointBackgroundColor: borderColors,
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: borderColors,
-                pointRadius: 6,
-                pointHoverRadius: 8,
-                fill: true,
-                tension: 0.3
-            }]
+            datasets: [
+                {
+                    label: 'Reward Score (Rt) 📈',
+                    data: rewards,
+                    borderColor: 'rgba(79, 70, 229, 1)', // Indigo
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    yAxisID: 'y',
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.3
+                },
+                {
+                    label: 'Value Loss (lv) 📉',
+                    data: losses,
+                    borderColor: 'rgba(239, 68, 68, 1)', // Red
+                    backgroundColor: 'transparent',
+                    yAxisID: 'y1',
+                    borderDash: [5, 5],
+                    pointRadius: 4,
+                    tension: 0.3
+                }
+            ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            animation: {
-                // Ensure chart finishes animating before PDF capture
-                duration: 0 
-            },
+            animation: { duration: 0 },
+            interaction: { mode: 'index', intersect: false },
             plugins: {
-                legend: { display: false }
+                legend: { position: 'top' }
             },
             scales: {
                 y: {
-                    beginAtZero: true,
-                    grid: { borderDash: [2, 4], color: '#f3f4f6' },
-                    title: { display: true, text: 'Reward Score' }
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: { display: true, text: 'Reward (Maximizing)' },
+                    grid: { color: '#f3f4f6' }
                 },
-                x: {
-                    grid: { display: false }
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: { display: true, text: 'Value Loss (Minimizing)' },
+                    grid: { drawOnChartArea: false }
                 }
             }
         }
@@ -254,15 +286,12 @@ function getLocalImageAsBase64($absolutePath) {
         const element = document.getElementById('report-content');
         const btn = document.getElementById('download-btn');
         
-        // 1. Temporarily hide the download button so it isn't captured in the PDF
         btn.style.display = 'none';
 
-        // 2. Generate dynamic file name
         const campaignName = "<?= addslashes($active_data['campaign_details']['campaign_name']) ?>";
         const cleanName = campaignName.replace(/[^a-zA-Z0-9]/g, "_");
-        const filename = cleanName + "_Optimization_Report.pdf";
+        const filename = "ICACCIS_Proof_" + cleanName + ".pdf";
 
-        // 3. Configure PDF Options
         const opt = {
             margin:       0.4,
             filename:     filename,
@@ -271,14 +300,11 @@ function getLocalImageAsBase64($absolutePath) {
             jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
 
-        // 4. Generate & Download
         html2pdf().set(opt).from(element).save().then(() => {
-            // Restore the button visibility after download completes
             btn.style.display = 'flex';
         });
     }
 </script>
 <?php endif; ?>
-
 </body>
 </html>

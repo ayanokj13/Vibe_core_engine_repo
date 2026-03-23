@@ -1,42 +1,322 @@
 [
-  {
-    "local_image_path": "Neutrogena.png",
-    "campaign_data": {
-        "campaign_name": "Winter Hydration Launch",
-        "campaign_objectives": "Conversions", 
-        "platform_channels": "Instagram", 
-        "brand_name": "AuraGlow",
-        "product_name": "Vitamin C Radiance",
-        "product_category": "Skincare",
-        "product_highlights": "Deep hydration, fades dark spots, instantly brightens skin tone",
-        "ingredients": "15% L-Ascorbic Acid, Hyaluronic Acid",
-        "price": 45.99,
-        "target_audience": "25-34", 
-        "vibe": "Luxury",
-        "duration": "15 seconds",
-        "channel_used": "Instagram", 
-        "visual_elements": "lemon slices",
-        "colors": "#FFD700, #FFFFFF, #F5F5DC"
+   {
+        "local_image_path": "Product_Images/Sisley_Ultra_Eyeliner.jpg",
+        "campaign_data": {
+            "campaign_name": "Sisley Ultra Eyeliner - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Sisley",
+            "product_name": "Ultra Eyeliner",
+            "product_category": "Blush",
+            "product_highlights": "Formulated with Salicylic Acid",
+            "ingredients": "Salicylic Acid",
+            "price": 29.12,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, water droplets, earthy terracotta",
+            "colors": "#964B00, #8B9467, #3E8E41"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Sisley_Magic_Face_Mask.jpg",
+        "campaign_data": {
+            "campaign_name": "Sisley Magic Face Mask - Variant A (Minimalist)",
+            "campaign_objectives": "Conversions",
+            "platform_channels": "Instagram",
+            "brand_name": "Sisley",
+            "product_name": "Magic Face Mask",
+            "product_category": "Mascara",
+            "product_highlights": "Formulated with Shea Butter",
+            "ingredients": "Shea Butter",
+            "price": 148.33,
+            "target_audience": "25-34",
+            "vibe": "Minimalist",
+            "duration": "15 seconds",
+            "channel_used": "Instagram",
+            "visual_elements": "clean lines, simple typography, empty space",
+            "colors": "#FFFFFF, #E5E5EA, #F7F7F7"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Sisley_Magic_Face_Mask.jpg",
+        "campaign_data": {
+            "campaign_name": "Sisley Magic Face Mask - Variant B (Luxury)",
+            "campaign_objectives": "Engagement",
+            "platform_channels": "TikTok",
+            "brand_name": "Sisley",
+            "product_name": "Magic Face Mask",
+            "product_category": "Mascara",
+            "product_highlights": "Formulated with Shea Butter",
+            "ingredients": "Shea Butter",
+            "price": 148.33,
+            "target_audience": "18-24 (Gen Z)",
+            "vibe": "Luxury",
+            "duration": "15 seconds",
+            "channel_used": "TikTok",
+            "visual_elements": "gold accents, velvet packaging, sleek glass jars",
+            "colors": "#FFD700, #964B00, #C0C0C0"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Sisley_Magic_Face_Mask.jpg",
+        "campaign_data": {
+            "campaign_name": "Sisley Magic Face Mask - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Sisley",
+            "product_name": "Magic Face Mask",
+            "product_category": "Mascara",
+            "product_highlights": "Formulated with Shea Butter",
+            "ingredients": "Shea Butter",
+            "price": 148.33,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, water droplets, earthy terracotta pots",
+            "colors": "#964B00, #8B9467, #3E8E41"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Anastasia_Beverly_Hills_Divine_Mascara.png",
+        "campaign_data": {
+            "campaign_name": "Anastasia Beverly Hills Divine Mascara - Variant A (Minimalist)",
+            "campaign_objectives": "Conversions",
+            "platform_channels": "Instagram",
+            "brand_name": "Anastasia Beverly Hills",
+            "product_name": "Divine Mascara",
+            "product_category": "Contour",
+            "product_highlights": "Formulated with Retinol",
+            "ingredients": "Retinol",
+            "price": 88.28,
+            "target_audience": "25-34",
+            "vibe": "Minimalist",
+            "duration": "15 seconds",
+            "channel_used": "Instagram",
+            "visual_elements": "clean lines, monochromatic typography, simple geometric shapes",
+            "colors": "#FFFFFF, #333333, #C5C5C5"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Anastasia_Beverly_Hills_Divine_Mascara.png",
+        "campaign_data": {
+            "campaign_name": "Anastasia Beverly Hills Divine Mascara - Variant B (Luxury)",
+            "campaign_objectives": "Engagement",
+            "platform_channels": "TikTok",
+            "brand_name": "Anastasia Beverly Hills",
+            "product_name": "Divine Mascara",
+            "product_category": "Contour",
+            "product_highlights": "Formulated with Retinol",
+            "ingredients": "Retinol",
+            "price": 88.28,
+            "target_audience": "18-24 (Gen Z)",
+            "vibe": "Luxury",
+            "duration": "15 seconds",
+            "channel_used": "TikTok",
+            "visual_elements": "gold accents, velvet packaging, sleek glass tubes",
+            "colors": "#FFD700, #964B00, #333333"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Anastasia_Beverly_Hills_Divine_Mascara.png",
+        "campaign_data": {
+            "campaign_name": "Anastasia Beverly Hills Divine Mascara - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Anastasia Beverly Hills",
+            "product_name": "Divine Mascara",
+            "product_category": "Contour",
+            "product_highlights": "Formulated with Retinol",
+            "ingredients": "Retinol",
+            "price": 88.28,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, water droplets, terracotta pots",
+            "colors": "#964B00, #8B9467, #3E8E41"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Farsali_Super_Lip_Gloss.png",
+        "campaign_data": {
+            "campaign_name": "Farsali Super Lip Gloss - Variant A (Minimalist)",
+            "campaign_objectives": "Conversions",
+            "platform_channels": "Instagram",
+            "brand_name": "Farsali",
+            "product_name": "Super Lip Gloss",
+            "product_category": "Setting Spray",
+            "product_highlights": "Formulated with Salicylic Acid",
+            "ingredients": "Salicylic Acid",
+            "price": 32.51,
+            "target_audience": "25-34",
+            "vibe": "Minimalist",
+            "duration": "15 seconds",
+            "channel_used": "Instagram",
+            "visual_elements": "clean lines, simple typography, white space, monochromatic packaging",
+            "colors": "#F7F7F7, #333333, #C5C5C5"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Farsali_Super_Lip_Gloss.png",
+        "campaign_data": {
+            "campaign_name": "Farsali Super Lip Gloss - Variant B (Luxury)",
+            "campaign_objectives": "Engagement",
+            "platform_channels": "TikTok",
+            "brand_name": "Farsali",
+            "product_name": "Super Lip Gloss",
+            "product_category": "Setting Spray",
+            "product_highlights": "Formulated with Salicylic Acid",
+            "ingredients": "Salicylic Acid",
+            "price": 32.51,
+            "target_audience": "18-24 (Gen Z)",
+            "vibe": "Luxury",
+            "duration": "15 seconds",
+            "channel_used": "TikTok",
+            "visual_elements": "gold accents, velvet packaging, sleek glass applicator",
+            "colors": "#FFD700, #964B00, #333333"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Farsali_Super_Lip_Gloss.png",
+        "campaign_data": {
+            "campaign_name": "Farsali Super Lip Gloss - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Farsali",
+            "product_name": "Super Lip Gloss",
+            "product_category": "Setting Spray",
+            "product_highlights": "Formulated with Salicylic Acid",
+            "ingredients": "Salicylic Acid",
+            "price": 32.51,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, water droplets, terracotta pots",
+            "colors": "#964B00, #8B9467, #3E8E41"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Too_Faced_Magic_Powder.png",
+        "campaign_data": {
+            "campaign_name": "Too Faced Magic Powder - Variant A (Minimalist)",
+            "campaign_objectives": "Conversions",
+            "platform_channels": "Instagram",
+            "brand_name": "Too Faced",
+            "product_name": "Magic Powder",
+            "product_category": "Foundation",
+            "product_highlights": "Formulated with Hyaluronic Acid",
+            "ingredients": "Hyaluronic Acid",
+            "price": 118.67,
+            "target_audience": "25-34",
+            "vibe": "Minimalist",
+            "duration": "15 seconds",
+            "channel_used": "Instagram",
+            "visual_elements": "clean lines, simple typography, monochromatic background",
+            "colors": "#FFFFFF, #E5E5EA, #F7F7F7"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Too_Faced_Magic_Powder.png",
+        "campaign_data": {
+            "campaign_name": "Too Faced Magic Powder - Variant B (Luxury)",
+            "campaign_objectives": "Engagement",
+            "platform_channels": "TikTok",
+            "brand_name": "Too Faced",
+            "product_name": "Magic Powder",
+            "product_category": "Foundation",
+            "product_highlights": "Formulated with Hyaluronic Acid",
+            "ingredients": "Hyaluronic Acid",
+            "price": 118.67,
+            "target_audience": "18-24 (Gen Z)",
+            "vibe": "Luxury",
+            "duration": "15 seconds",
+            "channel_used": "TikTok",
+            "visual_elements": "gold accents, velvet packaging, sleek glass bottles",
+            "colors": "#FFD700, #964B00, #333333"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Too_Faced_Magic_Powder.png",
+        "campaign_data": {
+            "campaign_name": "Too Faced Magic Powder - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Too Faced",
+            "product_name": "Magic Powder",
+            "product_category": "Foundation",
+            "product_highlights": "Formulated with Hyaluronic Acid",
+            "ingredients": "Hyaluronic Acid",
+            "price": 118.67,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, lotus flowers, misty forest, wooden accents",
+            "colors": "#964B00, #8B9467, #3E8E41"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Becca_Super_Contour.jpg",
+        "campaign_data": {
+            "campaign_name": "Becca Super Contour - Variant A (Minimalist)",
+            "campaign_objectives": "Conversions",
+            "platform_channels": "Instagram",
+            "brand_name": "Becca",
+            "product_name": "Super Contour",
+            "product_category": "Bronzer",
+            "product_highlights": "Formulated with Glycerin",
+            "ingredients": "Glycerin",
+            "price": 70.62,
+            "target_audience": "25-34",
+            "vibe": "Minimalist",
+            "duration": "15 seconds",
+            "channel_used": "Instagram",
+            "visual_elements": "clean lines, simple typography, monochromatic textures",
+            "colors": "#FFFFFF, #F7F7F7, #E5E5EA"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Becca_Super_Contour.jpg",
+        "campaign_data": {
+            "campaign_name": "Becca Super Contour - Variant B (Luxury)",
+            "campaign_objectives": "Engagement",
+            "platform_channels": "TikTok",
+            "brand_name": "Becca",
+            "product_name": "Super Contour",
+            "product_category": "Bronzer",
+            "product_highlights": "Formulated with Glycerin",
+            "ingredients": "Glycerin",
+            "price": 70.62,
+            "target_audience": "18-24 (Gen Z)",
+            "vibe": "Luxury",
+            "duration": "15 seconds",
+            "channel_used": "TikTok",
+            "visual_elements": "gold accents, sleek glass packaging, velvet pouch",
+            "colors": "#FFD700, #964B00, #333333"
+        }
+    },
+    {
+        "local_image_path": "Product_Images/Becca_Super_Contour.jpg",
+        "campaign_data": {
+            "campaign_name": "Becca Super Contour - Variant C (Nature)",
+            "campaign_objectives": "Brand Awareness",
+            "platform_channels": "Facebook",
+            "brand_name": "Becca",
+            "product_name": "Super Contour",
+            "product_category": "Bronzer",
+            "product_highlights": "Formulated with Glycerin",
+            "ingredients": "Glycerin",
+            "price": 70.62,
+            "target_audience": "35-50",
+            "vibe": "Nature",
+            "duration": "Static Image",
+            "channel_used": "Facebook",
+            "visual_elements": "leaves, terracotta pots, river rocks",
+            "colors": "#32CD32, #964B00, #3E8E41"
+        }
     }
-  },
-  {
-    "local_image_path": "esteelauder.png",
-    "campaign_data": {
-        "campaign_name": "Bold Matte Summer",
-        "campaign_objectives": "Brand Awareness", 
-        "platform_channels": "Facebook", 
-        "brand_name": "Velvet Serum",
-        "product_name": "Liquid Matte",
-        "product_category": "Makeup",
-        "product_highlights": "Smudge-proof, 24-hour wear, vivid pigmentation",
-        "ingredients": "Vitamin E, Jojoba Oil",
-        "price": 22.50,
-        "target_audience": "18-28", 
-        "vibe": "Nature",
-        "duration": "10 seconds",
-        "channel_used": "Facebook", 
-        "visual_elements": "rose petals",
-        "colors": "#FF0000, #000000, #FF00FF"
-    }
-  }
 ]
